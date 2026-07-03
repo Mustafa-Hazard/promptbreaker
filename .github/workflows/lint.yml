@@ -1,0 +1,40 @@
+name: Lint & Security Scan
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  backend:
+    name: Python — Flake8 + Bandit + Pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dev dependencies
+        run: pip install -r backend/requirements-dev.txt
+      - name: Lint (Flake8)
+        run: flake8 backend/
+      - name: Security scan (Bandit)
+        run: bandit -r backend/app/ -ll
+      - name: Tests (Pytest)
+        run: pytest backend/tests/ -v
+
+  frontend:
+    name: JavaScript — ESLint + Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: cd frontend && npm ci
+      - name: Lint (ESLint)
+        run: cd frontend && npm run lint
+      - name: Format check (Prettier)
+        run: cd frontend && npm run format:check

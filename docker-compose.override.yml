@@ -1,0 +1,21 @@
+version: "3.9"
+
+# Auto-applied by `docker compose up` when this file sits next to
+# docker-compose.yml. Adds hot-reload volumes and dev commands.
+
+services:
+  backend:
+    build:
+      target: dependencies
+    volumes:
+      - ./backend:/app
+    environment:
+      - FLASK_ENV=development
+    command: flask run --host=0.0.0.0 --port=5000 --reload
+
+  frontend:
+    build:
+      target: dependencies
+    volumes:
+      - ./frontend/src:/app/src
+    command: npm run dev
