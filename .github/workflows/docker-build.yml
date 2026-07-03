@@ -13,6 +13,6 @@ jobs:
       - name: Create dummy .env for build validation
         run: cp .env.example .env
       - name: Validate compose file
-        run: docker compose config
-      - name: Build all services
-        run: docker compose build
+        run: docker compose -f docker-compose.yml config
+      - name: Build all services (production target only)
+        run: docker compose -f docker-compose.yml build

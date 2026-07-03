@@ -3,7 +3,7 @@ WORKDIR /app
 
 FROM base AS dependencies
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm ci
 
 FROM dependencies AS production
 COPY src/ ./src/
