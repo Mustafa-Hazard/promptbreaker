@@ -1,8 +1,17 @@
+import ChatWindow from "./components/ChatWindow";
+import "./App.css";
+
 function App() {
   return (
-    <div style={{ fontFamily: "sans-serif", padding: "2rem" }}>
-      <h1>PromptBreaker 🔴🟢</h1>
-      <p>Chat UI arrives in Phase 1.</p>
+    <div className="app-shell">
+      <div>
+        <div className="app-header">
+          <p className="app-title">
+            <strong>PromptBreaker</strong> — Prompt Injection Attack &amp; Defense Lab
+          </p>
+        </div>
+        <ChatWindow />
+      </div>
     </div>
   );
 }
