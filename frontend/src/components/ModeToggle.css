@@ -1,0 +1,36 @@
+.mode-toggle {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mode-toggle-btn {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  background: var(--panel);
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.mode-toggle-btn:hover {
+  color: var(--text);
+}
+
+.mode-toggle-btn.active.vulnerable {
+  background: var(--accent-vulnerable-dim);
+  color: var(--accent-vulnerable);
+}
+
+.mode-toggle-btn.active.hardened {
+  background: var(--accent-safe-dim);
+  color: var(--accent-safe);
+}
