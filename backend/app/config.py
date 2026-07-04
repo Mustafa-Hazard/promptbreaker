@@ -22,7 +22,8 @@ class Config:
 
     @property
     def ALLOWED_ORIGINS(self):
-        return os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
+        origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000")
+        return [o.strip() for o in origins.split(",")]
 
     def validate(self):
         if not self.GROQ_API_KEY:

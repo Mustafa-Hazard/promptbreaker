@@ -18,9 +18,9 @@ jobs:
       - name: Install dev dependencies
         run: pip install -r backend/requirements-dev.txt
       - name: Lint (Flake8)
-        run: flake8 backend/
+        run: flake8 backend/ scripts/
       - name: Security scan (Bandit)
-        run: bandit -r backend/app/ -ll
+        run: bandit -r backend/app/ scripts/ -ll
       - name: Tests (Pytest)
         run: pytest backend/tests/ -v
 
