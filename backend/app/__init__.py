@@ -1,10 +1,9 @@
-from flask import Flask, app
+from flask import Flask
 from flask_cors import CORS
 
 from .config import Config
 from .routes.health import health_bp
 from .routes.chat import chat_bp
-
 
 def create_app(config=None):
     app = Flask(__name__)
