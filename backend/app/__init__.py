@@ -1,4 +1,4 @@
-from flask import Flask, app
+from flask import Flask
 from flask_cors import CORS
 
 from .config import Config
