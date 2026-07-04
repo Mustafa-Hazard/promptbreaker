@@ -1,0 +1,144 @@
+<svg viewBox="0 0 1280 900" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333333"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#c0392b"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#1e8e5a"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="900" fill="#ffffff"/>
+
+  <text x="640" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#1a1a1a">PromptBreaker — Architecture</text>
+  <text x="640" y="64" text-anchor="middle" font-size="13" fill="#666666">Client → Flask backend → Groq API, with two request paths based on mode</text>
+
+  <!-- Docker Compose bounding box -->
+  <rect x="40" y="100" width="820" height="600" rx="10" fill="none" stroke="#999999" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="60" y="124" font-size="13" font-weight="600" fill="#666666">docker-compose.yml — local / containerized deployment</text>
+
+  <!-- Client box -->
+  <rect x="70" y="150" width="330" height="300" rx="8" fill="#eef6f1" stroke="#3ecf8e" stroke-width="2"/>
+  <text x="235" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a1a">Client (React + Vite)</text>
+  <text x="235" y="196" text-anchor="middle" font-size="11" fill="#666666">frontend/ — port 3000</text>
+
+  <rect x="95" y="215" width="280" height="36" rx="5" fill="#ffffff" stroke="#cccccc"/>
+  <text x="235" y="238" text-anchor="middle" font-size="12" fill="#1a1a1a">ChatWindow.jsx</text>
+
+  <rect x="95" y="260" width="130" height="36" rx="5" fill="#ffffff" stroke="#cccccc"/>
+  <text x="160" y="283" text-anchor="middle" font-size="11" fill="#1a1a1a">ModeToggle.jsx</text>
+
+  <rect x="245" y="260" width="130" height="36" rx="5" fill="#ffffff" stroke="#cccccc"/>
+  <text x="310" y="283" text-anchor="middle" font-size="11" fill="#1a1a1a">AttackPanel.jsx</text>
+
+  <rect x="95" y="305" width="280" height="36" rx="5" fill="#ffffff" stroke="#cccccc"/>
+  <text x="235" y="328" text-anchor="middle" font-size="12" fill="#1a1a1a">DefenseExplainer.jsx</text>
+
+  <rect x="95" y="350" width="280" height="36" rx="5" fill="#ffffff" stroke="#cccccc"/>
+  <text x="235" y="373" text-anchor="middle" font-size="12" fill="#1a1a1a">useChat.js → services/api.js</text>
+
+  <text x="235" y="420" text-anchor="middle" font-size="11" fill="#666666">POST /api/chat</text>
+  <text x="235" y="436" text-anchor="middle" font-size="11" fill="#666666">{"{ message, mode }"}</text>
+
+  <!-- Arrow client -> backend -->
+  <line x1="400" y1="300" x2="450" y2="300" stroke="#333333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Backend box -->
+  <rect x="450" y="150" width="380" height="500" rx="8" fill="#eef3fb" stroke="#4a7fd6" stroke-width="2"/>
+  <text x="640" y="178" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a1a">Backend (Flask)</text>
+  <text x="640" y="196" text-anchor="middle" font-size="11" fill="#666666">backend/ — port 5000</text>
+
+  <rect x="475" y="215" width="330" height="34" rx="5" fill="#ffffff" stroke="#cccccc"/>
+  <text x="640" y="237" text-anchor="middle" font-size="12" fill="#1a1a1a">routes/chat.py · routes/health.py</text>
+
+  <text x="640" y="272" text-anchor="middle" font-size="11" font-weight="600" fill="#666666">mode = "vulnerable"</text>
+  <line x1="640" y1="280" x2="640" y2="320" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+  <text x="640" y="345" text-anchor="middle" font-size="11" font-weight="600" fill="#666666">mode = "hardened"</text>
+
+  <rect x="475" y="355" width="100" height="40" rx="5" fill="#ffffff" stroke="#1e8e5a"/>
+  <text x="525" y="379" text-anchor="middle" font-size="10.5" fill="#1a1a1a">sanitizer.py</text>
+
+  <line x1="575" y1="375" x2="605" y2="375" stroke="#1e8e5a" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- llm_client shared -->
+  <rect x="605" y="355" width="140" height="40" rx="5" fill="#fff9e6" stroke="#c9a227"/>
+  <text x="675" y="373" text-anchor="middle" font-size="10.5" fill="#1a1a1a">llm_client.py</text>
+  <text x="675" y="387" text-anchor="middle" font-size="9" fill="#666666">llama-3.1-8b-instant</text>
+
+  <!-- red path into llm_client (vulnerable, bypasses sanitizer) -->
+  <line x1="640" y1="320" x2="675" y2="355" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+  <!-- validator after llm_client, hardened only -->
+  <line x1="745" y1="375" x2="775" y2="375" stroke="#1e8e5a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <rect x="475" y="410" width="270" height="40" rx="5" fill="#ffffff" stroke="#1e8e5a"/>
+  <text x="610" y="434" text-anchor="middle" font-size="10.5" fill="#1a1a1a">validator.py — redacts leaked secrets</text>
+  <line x1="775" y1="375" x2="775" y2="430" stroke="#1e8e5a" stroke-width="2"/>
+  <line x1="775" y1="430" x2="750" y2="430" stroke="#1e8e5a" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- prompts.py -->
+  <rect x="475" y="465" width="330" height="60" rx="5" fill="#ffffff" stroke="#cccccc"/>
+  <text x="640" y="487" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1a1a1a">prompts.py</text>
+  <text x="640" y="504" text-anchor="middle" font-size="10" fill="#666666">VULNERABLE_SYSTEM_PROMPT / HARDENED_SYSTEM_PROMPT</text>
+  <text x="640" y="518" text-anchor="middle" font-size="9.5" fill="#999999">(seeded with fictional bait secrets)</text>
+
+  <line x1="675" y1="395" x2="675" y2="405" stroke="#999999" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="675" y1="405" x2="800" y2="405" stroke="#999999" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="800" y1="405" x2="800" y2="490" stroke="#999999" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="800" y1="490" x2="805" y2="490" stroke="#999999" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <text x="810" y="450" font-size="9.5" fill="#999999">reads</text>
+
+  <!-- response labels -->
+  <rect x="475" y="545" width="330" height="70" rx="5" fill="#fdf1f1" stroke="#e5b3b3"/>
+  <text x="640" y="567" text-anchor="middle" font-size="11" font-weight="600" fill="#1a1a1a">Response: {"{ response, mode, defense_layer }"}</text>
+  <text x="640" y="584" text-anchor="middle" font-size="9.5" fill="#666666">defense_layer: "sanitizer" | "validator" | "none"</text>
+  <text x="640" y="600" text-anchor="middle" font-size="9.5" fill="#666666">(vulnerable mode always reports "none")</text>
+
+  <!-- Arrow backend -> Groq -->
+  <line x1="830" y1="380" x2="900" y2="380" stroke="#333333" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Groq box (outside compose boundary - external service) -->
+  <rect x="900" y="330" width="330" height="100" rx="8" fill="#f5f0fa" stroke="#8859c2" stroke-width="2"/>
+  <text x="1065" y="360" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a1a">Groq API (external)</text>
+  <text x="1065" y="380" text-anchor="middle" font-size="11" fill="#666666">chat completions endpoint</text>
+  <text x="1065" y="398" text-anchor="middle" font-size="11" fill="#666666">model: llama-3.1-8b-instant</text>
+  <text x="1065" y="416" text-anchor="middle" font-size="10" fill="#999999">via GROQ_API_KEY (.env)</text>
+
+  <!-- CI/CD box -->
+  <rect x="900" y="470" width="330" height="180" rx="8" fill="#f4f4f4" stroke="#999999" stroke-width="1.5"/>
+  <text x="1065" y="496" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a1a">GitHub Actions (CI)</text>
+  <text x="1065" y="520" text-anchor="middle" font-size="10.5" fill="#333333">lint.yml</text>
+  <text x="1065" y="536" text-anchor="middle" font-size="9.5" fill="#666666">Flake8 + Bandit + Pytest</text>
+  <text x="1065" y="550" text-anchor="middle" font-size="9.5" fill="#666666">ESLint + Prettier</text>
+  <text x="1065" y="576" text-anchor="middle" font-size="10.5" fill="#333333">docker-build.yml</text>
+  <text x="1065" y="592" text-anchor="middle" font-size="9.5" fill="#666666">validates production Docker build</text>
+  <text x="1065" y="618" text-anchor="middle" font-size="9.5" fill="#999999">triggered on push / pull_request</text>
+  <text x="1065" y="638" text-anchor="middle" font-size="9.5" fill="#999999">into main / dev</text>
+
+  <!-- attack script -->
+  <rect x="70" y="480" width="330" height="90" rx="8" fill="#fdf7ec" stroke="#c9a227" stroke-width="1.5"/>
+  <text x="235" y="504" text-anchor="middle" font-size="13" font-weight="700" fill="#1a1a1a">scripts/run_attacks.py</text>
+  <text x="235" y="524" text-anchor="middle" font-size="10" fill="#666666">Sends 5 attack payloads to /api/chat</text>
+  <text x="235" y="540" text-anchor="middle" font-size="10" fill="#666666">against both modes, N runs each</text>
+  <text x="235" y="556" text-anchor="middle" font-size="10" fill="#666666">writes docs/attacks/*.md from real captures</text>
+
+  <line x1="235" y1="480" x2="235" y2="452" stroke="#c9a227" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Legend -->
+  <rect x="70" y="740" width="1130" height="130" rx="8" fill="#fafafa" stroke="#dddddd"/>
+  <text x="90" y="765" font-size="13" font-weight="700" fill="#1a1a1a">Legend</text>
+
+  <line x1="90" y1="785" x2="130" y2="785" stroke="#c0392b" stroke-width="2.5"/>
+  <text x="140" y="789" font-size="11" fill="#333333">Vulnerable mode path — no defenses, direct to LLM</text>
+
+  <line x1="90" y1="805" x2="130" y2="805" stroke="#1e8e5a" stroke-width="2.5"/>
+  <text x="140" y="809" font-size="11" fill="#333333">Hardened mode path — sanitizer → LLM → validator</text>
+
+  <line x1="90" y1="825" x2="130" y2="825" stroke="#999999" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="140" y="829" font-size="11" fill="#333333">Reads from / triggered by</text>
+
+  <text x="90" y="849" font-size="10.5" fill="#666666">All account numbers, codes, and "internal" details in prompts.py are fictional, invented for this security-training lab.</text>
+</svg>
