@@ -1,5 +1,3 @@
-version: "3.9"
-
 # Auto-applied by `docker compose up` when this file sits next to
 # docker-compose.yml. Adds hot-reload volumes and dev commands.
 
@@ -18,4 +16,6 @@ services:
       target: dependencies
     volumes:
       - ./frontend/src:/app/src
-    command: npm run dev
+      - ./frontend/vite.config.js:/app/vite.config.js
+      - ./frontend/index.html:/app/index.html
+    command: npm run dev -- --host 0.0.0.0 --port 3000

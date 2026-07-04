@@ -1,6 +1,6 @@
 # Data Exfiltration
 
-**OWASP mapping:** LLM06: Sensitive Information Disclosure
+**OWASP mapping:** LLM02:2025 Sensitive Information Disclosure
 
 ## Payload
 
