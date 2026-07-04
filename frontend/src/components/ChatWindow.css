@@ -47,6 +47,44 @@
   background: var(--accent-vulnerable-dim);
 }
 
+.mode-badge.hardened {
+  border-color: var(--accent-safe);
+  color: var(--accent-safe);
+  background: var(--accent-safe-dim);
+}
+
+.chat-bubble-meta {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.3rem;
+}
+
+.mode-tag,
+.defense-tag {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
+
+.mode-tag.vulnerable {
+  background: var(--accent-vulnerable-dim);
+  color: var(--accent-vulnerable);
+}
+
+.mode-tag.hardened {
+  background: var(--accent-safe-dim);
+  color: var(--accent-safe);
+}
+
+.defense-tag {
+  background: var(--panel-raised);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
 .chat-log {
   flex: 1;
   min-height: 320px;
@@ -153,4 +191,13 @@
 
 .chat-send-btn:not(:disabled):hover {
   opacity: 0.85;
+}
+
+.chat-window.hardened .chat-prompt-glyph {
+  color: var(--accent-safe);
+}
+
+.chat-window.hardened .chat-send-btn {
+  background: var(--accent-safe);
+  color: #06140d;
 }
